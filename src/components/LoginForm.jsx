@@ -6,49 +6,27 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 function LoginForm({ onSuccess }) {
-    const { loginWithGoogle, loginWithMagicLink, loginWithPassword, loading } = useAuth();
+    const { loginWithGoogle, loginWithMagicLink, loading } = useAuth();
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [usePassword, setUsePassword] = useState(false);
     const [magicLinkSent, setMagicLinkSent] = useState(false);
     const [error, setError] = useState('');
     const [sendingLink, setSendingLink] = useState(false);
 
-    // For redirect
-    const { user } = useAuth();
-    if (user && onSuccess) {
-        // onSuccess(); // Better handled after await? Let's check logic.
-    }
-
-    const handleSubmit = async (e) => {
+    const handleMagicLinkLogin = async (e) => {
         e.preventDefault();
         if (!email) {
             setError('Please enter your college email ID');
             return;
         }
-        if (usePassword && !password) {
-            setError('Please enter your password');
-            return;
-        }
-
         setError('');
         setSendingLink(true);
 
         try {
-            if (usePassword) {
-                const res = await loginWithPassword(email, password);
-                if (res.success) {
-                    if (onSuccess) onSuccess(); // Close modal/redirect
-                } else {
-                    setError('Login failed. Please check your credentials.');
-                }
+            const res = await loginWithMagicLink(email);
+            if (res.success) {
+                setMagicLinkSent(true);
             } else {
-                const res = await loginWithMagicLink(email);
-                if (res.success) {
-                    setMagicLinkSent(true);
-                } else {
-                    setError('Failed to send magic link. Please try again.');
-                }
+                setError('Failed to send magic link. Please try again.');
             }
         } catch (err) {
             setError('An unexpected error occurred.');
@@ -73,7 +51,6 @@ function LoginForm({ onSuccess }) {
             className="relative z-10 w-full max-w-6xl h-[650px] pt-18 px-20 flex gap-6 shadow-2xl"
         >
             <div className="hidden md:flex w-1/2 rounded-3xl relative bg-[#B7C9D9]/10 backdrop-blur-lg items-center justify-center overflow-hidden">
-                {/* Image or content for left side if any was previously there, kept empty as per original */}
             </div>
 
             <div className="w-full md:w-1/2 px-12 py-16 rounded-3xl flex flex-col justify-center bg-[#B7C9D9]/10 backdrop-blur-lg">
@@ -85,7 +62,7 @@ function LoginForm({ onSuccess }) {
                 >
                     <h1 className="text-4xl sm:text-5xl font-bold text-[#CDB7D9] mb-4 tracking-tight">LOGIN</h1>
                     <p className="text-[#CDB7D9]/80 text-sm mb-8 leading-relaxed">
-                        Dive into the heart of VIT Bhopal with AdVlTya'25 - an electrifying blend of technology and culture.
+                        Dive into the heart of VIT Bhopal with AdVlTya'25 - an electrifying blend of technology and culture. Crafted by the ingenious minds of VIT Bhopal students,
                     </p>
 
                     {magicLinkSent ? (
@@ -108,8 +85,8 @@ function LoginForm({ onSuccess }) {
                             </button>
                         </motion.div>
                     ) : (
-                        <form onSubmit={handleSubmit} className="space-y-4">
-                            <div className="space-y-4">
+                        <form onSubmit={handleMagicLinkLogin} className="space-y-2">
+                            <div>
                                 <input
                                     type="email"
                                     value={email}
@@ -118,28 +95,6 @@ function LoginForm({ onSuccess }) {
                                     className="w-full bg-[#CDB7D9]/10 text-white placeholder-[#CDB7D9]/80 rounded-xl px-5 py-4 focus:outline-none transition-all text-sm"
                                     required
                                 />
-                                {usePassword && (
-                                    <motion.input
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: 'auto' }}
-                                        type="password"
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        placeholder="Enter your Password"
-                                        className="w-full bg-[#CDB7D9]/10 text-white placeholder-[#CDB7D9]/80 rounded-xl px-5 py-4 focus:outline-none transition-all text-sm"
-                                        required
-                                    />
-                                )}
-                            </div>
-
-                            <div className="flex justify-end">
-                                <button
-                                    type="button"
-                                    onClick={() => setUsePassword(!usePassword)}
-                                    className="text-xs text-[#CDB7D9]/70 hover:text-[#CDB7D9] transition-colors underline"
-                                >
-                                    {usePassword ? 'Use Magic Link instead' : 'Use Password instead'}
-                                </button>
                             </div>
 
                             {error && (
@@ -148,7 +103,7 @@ function LoginForm({ onSuccess }) {
 
                             <button type="submit" className="hidden" />
                             <AnimatePresence>
-                                {(email || (usePassword && password)) && (
+                                {email && (
                                     <motion.div
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: 'auto' }}
@@ -166,9 +121,9 @@ function LoginForm({ onSuccess }) {
                                             {sendingLink ? (
                                                 <span className="flex items-center justify-center gap-2">
                                                     <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                                                    {usePassword ? 'Logging in...' : 'Sending...'}
+                                                    Sending...
                                                 </span>
-                                            ) : (usePassword ? 'Login' : 'Continue with Email')}
+                                            ) : 'Continue with Email'}
                                         </button>
                                     </motion.div>
                                 )}

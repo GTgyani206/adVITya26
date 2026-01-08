@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useUI } from '@/contexts/UIContext';
 import LoginForm from './LoginForm';
 
 function Header() {
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
-    const navigate = useNavigate();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -130,10 +129,7 @@ function Header() {
 
                         {headerMode === 'login' ? (
                             <div className="relative z-10 w-full h-full flex items-center justify-center p-4">
-                                <LoginForm onSuccess={() => {
-                                    closeHeader();
-                                    navigate('/dashboard');
-                                }} />
+                                <LoginForm onSuccess={closeHeader} />
                             </div>
                         ) : (
                             <>
