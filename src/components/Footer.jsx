@@ -15,7 +15,7 @@ function Footer() {
       <div className="flex gap-4 text-xs sm:text-sm text-[#CDB7D9] font-medium tracking-wider">
         {user ? (
           <>
-            {!isDashboard && <Link to="/dashboard" className="hover:text-white transition-colors uppercase">DASHBOARD</Link>}
+            <Link to="/dashboard" className="hover:text-white transition-colors uppercase">DASHBOARD</Link>
             <button onClick={logout} className="hover:text-white transition-colors cursor-pointer uppercase">LOGOUT</button>
           </>
         ) : (
