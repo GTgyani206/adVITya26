@@ -28,45 +28,55 @@ export const AuthProvider = ({ children }) => {
                 window.history.replaceState({}, document.title, window.location.pathname);
             }
 
-            const accountDetails = await account.get();
-            setUser(accountDetails);
+            try {
+                const accountDetails = await account.get();
+                setUser(accountDetails);
 
-            const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
-            const USERS_COLLECTION_ID = import.meta.env.VITE_APPWRITE_USERS_COLLECTION_ID;
+                const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
+                const USERS_COLLECTION_ID = import.meta.env.VITE_APPWRITE_USERS_COLLECTION_ID;
 
-            if (DATABASE_ID && USERS_COLLECTION_ID) {
-                try {
-                    const userDoc = await databases.getDocument(
-                        DATABASE_ID,
-                        USERS_COLLECTION_ID,
-                        accountDetails.$id
-                    );
+                if (DATABASE_ID && USERS_COLLECTION_ID) {
+                    try {
+                        const userDoc = await databases.getDocument(
+                            DATABASE_ID,
+                            USERS_COLLECTION_ID,
+                            accountDetails.$id
+                        );
 
-                    setUserData({
-                        ...userDoc,
-                        type: userDoc.role,
-                        email: accountDetails.email,
-                    });
-                } catch (error) {
-                    if (error.code === 404) {
-                        try {
-                            const newUserDoc = await databases.createDocument(
-                                DATABASE_ID,
-                                USERS_COLLECTION_ID,
-                                accountDetails.$id,
-                                {
+                        setUserData({
+                            ...userDoc,
+                            type: userDoc.role,
+                            email: accountDetails.email,
+                        });
+                    } catch (error) {
+                        if (error.code === 404) {
+                            try {
+                                const newUserDoc = await databases.createDocument(
+                                    DATABASE_ID,
+                                    USERS_COLLECTION_ID,
+                                    accountDetails.$id,
+                                    {
+                                        email: accountDetails.email,
+                                        role: 'member',
+                                        name: accountDetails.name,
+                                    }
+                                );
+                                setUserData({
+                                    ...newUserDoc,
+                                    type: 'member',
                                     email: accountDetails.email,
-                                    role: 'member',
-                                    name: accountDetails.name,
-                                }
-                            );
-                            setUserData({
-                                ...newUserDoc,
-                                type: 'member',
-                                email: accountDetails.email,
-                            });
-                        } catch (createError) {
-                            console.error("Failed to create user document:", createError);
+                                });
+                            } catch (createError) {
+                                console.error("Failed to create user document:", createError);
+
+                                setUserData({
+                                    type: 'member',
+                                    email: accountDetails.email,
+                                    ...accountDetails
+                                });
+                            }
+                        } else {
+                            console.error("Error fetching user document:", error);
 
                             setUserData({
                                 type: 'member',
@@ -74,27 +84,28 @@ export const AuthProvider = ({ children }) => {
                                 ...accountDetails
                             });
                         }
-                    } else {
-                        console.error("Error fetching user document:", error);
-
-                        setUserData({
-                            type: 'member',
-                            email: accountDetails.email,
-                            ...accountDetails
-                        });
                     }
+                } else {
+                    console.warn("Appwrite Database/Collection IDs missing in .env");
+                    let userType = 'member';
+                    if (accountDetails.labels && accountDetails.labels.includes('admin')) {
+                        userType = 'admin';
+                    }
+                    setUserData({
+                        type: userType,
+                        email: accountDetails.email,
+                        ...accountDetails
+                    });
                 }
-            } else {
-                console.warn("Appwrite Database/Collection IDs missing in .env");
-                let userType = 'member';
-                if (accountDetails.labels && accountDetails.labels.includes('admin')) {
-                    userType = 'admin';
+            } catch (error) {
+                // Suppress 401 error for guests
+                if (error.code === 401) {
+                    console.debug("User is not logged in (Guest)");
+                } else {
+                    console.error("Error fetching account details:", error);
                 }
-                setUserData({
-                    type: userType,
-                    email: accountDetails.email,
-                    ...accountDetails
-                });
+                setUser(null);
+                setUserData(null);
             }
 
         } catch (error) {

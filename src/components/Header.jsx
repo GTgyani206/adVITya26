@@ -43,7 +43,7 @@ function Header() {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
                 className={`fixed w-full py-2 z-50 transition-all duration-300 ${scrolled && !isOpen
-                    ? 'backdrop-blur-md shadow-lg border-white/20'
+                    ? 'bg-[#0F041C]/70 backdrop-blur-md shadow-lg border-b border-white/10'
                     : 'bg-transparent'
                     }`}
             >

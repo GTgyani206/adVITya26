@@ -30,6 +30,15 @@ export default function RegisterPage() {
                     EVENTS_COLLECTION_ID,
                     eventId
                 );
+                // Process poster URL and description fallback
+                if (eventDoc.poster) {
+                    if (!eventDoc.poster.startsWith('http')) {
+                        eventDoc.poster = `${import.meta.env.VITE_APPWRITE_ENDPOINT}/storage/buckets/${import.meta.env.VITE_APPWRITE_BUCKET_ID}/files/${eventDoc.poster}/view?project=${import.meta.env.VITE_APPWRITE_PROJECT_ID}`;
+                    }
+                } else {
+                    eventDoc.poster = "https://placehold.co/800x600/2A1A3E/FFF?text=Coming+Soon";
+                }
+
                 setEvent(eventDoc);
 
                 if (eventDoc.formFields && typeof eventDoc.formFields === 'string') {

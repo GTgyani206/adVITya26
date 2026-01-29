@@ -37,48 +37,48 @@
 
 /* Price Range Slider in Events Page */
 .range-slider {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  pointer-events: none;
-  appearance: none;
-  background: transparent;
+   position: absolute;
+   inset: 0;
+   width: 100%;
+   pointer-events: none;
+   appearance: none;
+   background: transparent;
 }
 
 .range-slider::-webkit-slider-thumb {
-  pointer-events: auto;
-  appearance: none;
-  height: 16px;
-  width: 16px;
-  background: #c084fc;
-  border-radius: 9999px;
-  cursor: pointer;
+   pointer-events: auto;
+   appearance: none;
+   height: 16px;
+   width: 16px;
+   background: #c084fc;
+   border-radius: 9999px;
+   cursor: pointer;
 }
 
 .range-slider::-moz-range-thumb {
-  pointer-events: auto;
-  height: 16px;
-  width: 16px;
-  background: #c084fc;
-  border-radius: 9999px;
-  cursor: pointer;
+   pointer-events: auto;
+   height: 16px;
+   width: 16px;
+   background: #c084fc;
+   border-radius: 9999px;
+   cursor: pointer;
 }
 
 
 /* Hide number input spinners for webkit-based browsers (Chrome, Safari, etc.) */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+   -webkit-appearance: none;
+   margin: 0;
 }
 
 /* Hide number input spinners for Firefox */
 input[type="number"] {
-  -moz-appearance: textfield;
+   -moz-appearance: textfield;
 }
 
 input[type="date"] {
-  color: aliceblue;
+   color: aliceblue;
 }
 
 
@@ -110,7 +110,7 @@ input[type="date"] {
    TEAM PAGE STYLES
    ============================================ */
 /* Add Team page specific custom styles here */
-.team-main-div{
+.team-main-div {
    padding: 34px 26px;
 }
 
@@ -125,3 +125,54 @@ input[type="date"] {
    ============================================ */
 /* Add reusable component custom styles here */
 
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes slideDown {
+   from {
+      opacity: 0;
+      transform: translateY(-10px);
+      max-height: 0;
+   }
+
+   to {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 500px;
+   }
+}
+
+.animate-slideDown {
+   animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+   from {
+      opacity: 0;
+   }
+
+   to {
+      opacity: 1;
+   }
+}
+
+@keyframes scaleIn {
+   from {
+      opacity: 0;
+      transform: scale(0.95);
+   }
+
+   to {
+      opacity: 1;
+      transform: scale(1);
+   }
+}
+
+.animate-fadeIn {
+   animation: fadeIn 0.2s ease-out;
+}
+
+.animate-scaleIn {
+   animation: scaleIn 0.3s ease-out;
+}
