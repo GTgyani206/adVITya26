@@ -28,10 +28,12 @@ const SectionContainer = ({ children, delay = 0 }) => (
 );
 
 function Team() {
-  const leadership = [
-    { name: "Dr. G. Vishwanathan", role: "Chancellor", image: "/Chancellor.jpg" },
+  const chancellor = { name: "Dr. G. Vishwanathan", role: "Chancellor", image: "/Chancellor.jpg" };
+  const vps = [
     { name: "Mr. Sankar Viswanathan", role: "Vice President", image: "/VP.jpg" },
     { name: "Mrs. Kadhambari S Viswanathan", role: "Assistant Vice President", image: "/AVP.jpg" },
+  ];
+  const others = [
     { name: "Prof. T. B. Sridharan", role: "Pro-Vice Chancellor", image: "/Pro_VC.jpg" },
     { name: "Mr. K.K. Nair", role: "Acting Registrar", image: "/Registrar.jpg" },
   ];
@@ -67,16 +69,35 @@ function Team() {
             </p>
           </motion.div>
 
-          {/* Leadership Section */}
+          {/* Leadership Section - 1-2-2 Grid */}
           <SectionContainer>
             <SectionTitle title="Our Leadership" />
-            <div className="flex flex-wrap justify-center gap-10">
-              {leadership.map((leader, idx) => (
+
+            {/* Row 1: Chancellor */}
+            <div className="flex justify-center w-full mb-10">
+              <div className="w-80"> {/* Slightly larger for Chancellor? Or keep w-64. User said "card in middle". I'll keep regular size to be safe. */}
+                <Team3DCard {...chancellor} />
+              </div>
+            </div>
+
+            {/* Row 2: VPs */}
+            <div className="flex flex-wrap justify-center gap-20 mb-10"> {/* Increased gap for better spacing */}
+              {vps.map((leader, idx) => (
                 <div key={idx} className="w-64">
                   <Team3DCard {...leader} />
                 </div>
               ))}
             </div>
+
+            {/* Row 3: Others */}
+            <div className="flex flex-wrap justify-center gap-20">
+              {others.map((leader, idx) => (
+                <div key={idx} className="w-64">
+                  <Team3DCard {...leader} />
+                </div>
+              ))}
+            </div>
+
           </SectionContainer>
 
           {/* Convenor Section */}
@@ -91,7 +112,7 @@ function Team() {
 
           {/* Co-Convenors Section */}
           <SectionContainer delay={0.2}>
-            <SectionTitle title="Co-Convenors" />
+            <SectionTitle title="Co-Conveners" />
             <div className="flex flex-wrap justify-center gap-8">
               {coConvenors.map((member, idx) => (
                 <div key={idx} className="w-64">
