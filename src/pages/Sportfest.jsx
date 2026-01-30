@@ -56,15 +56,9 @@ const SportCard = ({ sport, onReadMore }) => {
           {sport.details[0].replace('Format: ', '')}
         </p>
 
-        <p className="text-xs text-gray-400 mb-1 font-poppins">
-          <span className="font-semibold">Venue:</span>{' '}
-          Sports Complex
-        </p>
-
         <p className="text-xs text-gray-400 mb-3 font-poppins">
           <span className="font-semibold">Date:</span>{' '}
-          21 Feb 2025 • <span className="font-semibold">Time:</span>{' '}
-          10:00 AM
+          21 Feb 2025
         </p>
 
         <button
@@ -128,19 +122,8 @@ const SportModal = ({ sport, onClose, isMobile }) => {
                 </svg>
                 <span>21 February 2025</span>
               </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>10:00 AM</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>Sports Complex</span>
-              </div>
+
+
             </div>
 
             <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 rounded-xl p-4 mb-6">
@@ -222,7 +205,7 @@ function Sportfest() {
       name: 'Basket Ball',
       category: 'Team Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb33500248607c462/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: Knockout format', 'Players: max. 12 players', 'Time: 4 × 10 mins'],
+      details: ['Format: League Format', 'Venue: MPH', 'Players: max. 12 players', 'Time: 4 × 10 mins'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc-R7jPrBoVX774SYupEFzTAD2Q7rADZRoWadE8rKJ7diLP_g/viewform',
     },
     {
@@ -230,7 +213,7 @@ function Sportfest() {
       name: 'Football',
       category: 'Team Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb32a002aaa614c1e/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: Knockout format', 'Players: 11 + subs', 'Time: 30 mins halves'],
+      details: ['Format: League Format', 'Venue: Football Ground', 'Players: 11 + subs', 'Time: 30 mins halves'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSeA7Xly0LnZjcO86o6NOorO8_LhEiWHAALIYcO1Q8JLC3m0GQ/viewform',
     },
     {
@@ -238,7 +221,7 @@ function Sportfest() {
       name: 'Volleyball',
       category: 'Team Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb54c00321a3e4544/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: League format', 'Players: 6', 'Time: Best of 3 sets'],
+      details: ['Format: League Format', 'Venue: MPH', 'Players: 6', 'Time: Best of 3 sets'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSf5AzN_Edc2IT01ylz9-SIOn8p9PiN2jXvdYCGvsEMpu-l7Dw/viewform',
     },
     {
@@ -246,7 +229,7 @@ function Sportfest() {
       name: 'Badminton',
       category: 'Individual Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb57a00175a1de88f/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: Knockout', 'Singles & Doubles', 'Time: Best of 3 matches'],
+      details: ['Format: Knockouts', 'Venue: MPH', 'Singles & Doubles', 'Time: Best of 3 matches'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSes4RT3rEs-zXZ_wizH0M6mIjiuave0URxIhLGMjnwKJqqP5w/viewform',
     },
     {
@@ -254,7 +237,7 @@ function Sportfest() {
       name: 'Table Tennis',
       category: 'Individual Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb30e0033b253d393/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: Knockout', 'Singles & Doubles', 'Time: Best of 3 matches'],
+      details: ['Format: Knockout', 'Venue: Auditorium', 'Singles & Doubles', 'Time: Best of 3 matches'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSej5a1w7nq7BAGkb25Wb5L5IUyHAjpxoTiJG1JwhpNAiIykzw/viewform',
     },
     {
@@ -262,7 +245,7 @@ function Sportfest() {
       name: 'Cricket',
       category: 'Team Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb6fb003c59f0213a/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: T20 League', 'Players: 11 + subs', 'Time: 20 overs'],
+      details: ['Format: League Format', 'Venue: Cricket Ground', 'Players: 11 + subs', 'Time: 20 overs'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc5Me7mFTmHTSoq96gR5zdbOtlick7rFZXy7HMMQ4bsGMY4oA/viewform',
     },
     {
@@ -270,7 +253,7 @@ function Sportfest() {
       name: 'Kabaddi',
       category: 'Team Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb31d00295744d0a6/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: Knockout', 'Players: 7 + subs', 'Time: 15 mins/half'],
+      details: ['Format: League Format', 'Venue: Football Ground', 'Players: 7 + subs', 'Time: 15 mins/half'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc9PDeGfMUrql-1SD1dtBenwR7kBTCvjzVBZEVqTvjQJJko7w/viewform',
     },
     {
@@ -278,7 +261,7 @@ function Sportfest() {
       name: 'Chess',
       category: 'Individual Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb6d4001524dd56a3/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['Format: Individual', 'FIDE rules', 'Standard Time Control'],
+      details: ['Format: Knockout', 'Venue: Auditorium', 'FIDE rules', 'Standard Time Control'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSc--ThbPH-pxbPjEuHAixAAUJjHEgkuf5JMCtGHzouZ1Frw-g/viewform',
     },
     {
@@ -286,7 +269,7 @@ function Sportfest() {
       name: 'Weightlifting',
       category: 'Individual Sports',
       image: 'https://fra.cloud.appwrite.io/v1/storage/buckets/696f8e35003b8cc96b50/files/696fb301000e38f8535e/view?project=695eb843003ae5a0552b&mode=admin',
-      details: ['2 attempts/lift', 'Entry fees apply', 'Strict weight cats'],
+      details: ['2 attempts/lift', 'Venue: Open Auditorium', 'Entry fees apply', 'Strict weight cats'],
       registerLink: 'https://docs.google.com/forms/d/e/1FAIpQLSf1CbTnSnjWObGXsZRJEwb9ZHeGM1aL9iH55f77b_94jz-8Ag/viewform',
     },
   ];

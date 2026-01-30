@@ -215,7 +215,7 @@ function Team() {
 
           {loading && (
             <p className="text-center text-purple-300 mt-20">
-              Loading team data…
+              Assembling the minds behind AdVITya…
             </p>
           )}
 

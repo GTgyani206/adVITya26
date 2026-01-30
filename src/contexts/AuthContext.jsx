@@ -27,8 +27,21 @@ export const AuthProvider = ({ children }) => {
             const error = urlParams.get('error');
             const errorDesc = urlParams.get('error_description');
             if (error) {
-                console.error("OAuth Error from URL:", error, errorDesc);
-                alert(`Login Failed: ${errorDesc || error}`);
+                console.warn("OAuth Error detected:", error);
+                window.history.replaceState({}, document.title, window.location.pathname);
+
+                // Show a clear message to the user
+                if (error === 'user_already_exists' || errorDesc?.includes('user_already_exists')) {
+                    alert("Account Conflict: An account with this email already exists using a different login method (e.g., Email/Magic Link). Please login with that method.");
+                } else {
+                    alert(`Login Failed: ${errorDesc || error}`);
+                }
+
+                // Stop further processing to avoid 401s from account.get()
+                setUser(null);
+                setUserData(null);
+                setLoading(false);
+                return;
             }
 
             if (userId && secret) {
@@ -134,12 +147,12 @@ export const AuthProvider = ({ children }) => {
         try {
             console.log("Initiating Google Login...");
             console.log("Success URL:", `${window.location.origin}/dashboard`);
-            console.log("Failure URL:", `${window.location.origin}/login`);
+            console.log("Failure URL:", `${window.location.origin}/`);
 
             await account.createOAuth2Session(
                 OAuthProvider.Google,
                 `${window.location.origin}/dashboard`,
-                `${window.location.origin}/login`
+                `${window.location.origin}/`
             );
         } catch (error) {
             console.error("Google Login Error:", error);

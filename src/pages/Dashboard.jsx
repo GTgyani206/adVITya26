@@ -27,6 +27,12 @@ export default function Dashboard() {
     // Wait until userData is available
     if (!userData) return;
 
+    // Check Roles
+    if (userData.type === 'member') {
+      navigate('/');
+      return;
+    }
+
     const isAuthorized =
       userData.type === 'admin' ||
       userData.type === 'coordinator';
