@@ -388,10 +388,11 @@ export default function Home() {
                   <img src="/HomePage/Background.png" alt="BG" className='w-full h-full absolute shadow-lg rounded-4xl opacity-30' />
 
                   <div className='hidden lg:flex w-96 h-full z-10 flex-col'>
-                    <div className='w-full h-full max-h-[70%] flex py-6 px-4 flex-col relative'>
+                    <div className='w-content h-full max-h-[70%] flex py-6 px-4 flex-col relative'>
                       <motion.div variants={itemVariants} className='flex gap-4 text-white font-medium'>
                         <NavButton to="/events">Events</NavButton>
                         <NavButton to="/sportfest">Sports</NavButton>
+                        <NavButton to="/team">Team</NavButton>
                         <NavButton to="/sponsor">Sponsor US</NavButton>
                       </motion.div>
 
@@ -576,9 +577,22 @@ export default function Home() {
             <span className="text-4xl font-fugaz md:text-6xl">The Pulse</span>
             <div className="relative">
               <div className="absolute inset-0 bg-neutral-600 rounded-xl md:rounded-2xl hover:rotate-0 transition-transform duration-300 transform -rotate-12 translate-x-1 translate-y-1" />
-              <div className="relative bg-[#E6D4FF] p-2 md:p-3 rounded-xl md:rounded-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 shadow-lg shadow-purple-500/20">
+              <motion.div
+                initial={{ scale: 0, rotate: 0 }}
+                whileInView={{
+                  scale: 1,
+                  rotate: [0, -10, 10, -5, 5, 0],
+                  transition: {
+                    duration: 0.6,
+                    ease: "backOut",
+                    times: [0, 0.2, 0.4, 0.6, 0.8, 1]
+                  }
+                }}
+                viewport={{ once: false, amount: 0.5 }}
+                className="relative bg-[#E6D4FF] p-2 md:p-3 rounded-xl md:rounded-2xl shadow-lg shadow-purple-500/20"
+              >
                 <Activity className="text-black w-8 h-8 md:w-12 md:h-12 stroke-[3]" />
-              </div>
+              </motion.div>
             </div>
             <span className="text-4xl font-fugaz md:text-6xl">of Central India</span>
           </div>
@@ -681,7 +695,7 @@ export default function Home() {
 
         {/* Events Section */}
         <EventsSection />
-      </div>
+      </div >
     </>
   );
 }
