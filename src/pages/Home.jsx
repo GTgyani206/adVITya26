@@ -405,7 +405,7 @@ export default function Home() {
                       </motion.div>
                     </div>
 
-                    <div className='w-full h-[35%] -left-[2px] -bottom-[2px] border-t-2 border-r-2 border-[#EFD2FF] bg-[#12001A] rounded-tr-3xl pt-3 pr-3 relative group'>
+                    <div className='w-full h-[35%] -left-[2px] -bottom-[2px] border-t-2 border-r-2 border-[#EFD2FF] bg-[#12001A] rounded-tr-3xl rounded-tl-3xl pt-3 pr-3 relative group'>
                       <BookingCard variants={itemVariants} />
                     </div>
                   </div>
@@ -440,7 +440,7 @@ export default function Home() {
                         <RevealText text="Feel the Enigma" delay={0.5} />
                       </motion.div>
                     </div>
-                    <div ref={lyricsWrapperRef} className='bg-neutral-800/20 border-t border-x border-white/40 backdrop-blur-xs rounded-t-4xl p-4 sm:p-6 w-full h-full overflow-hidden flex flex-col relative z-20'>
+                    <div ref={lyricsWrapperRef} className='bg-neutral-800/20 border-t border-x border-b border-r border-white/40 backdrop-blur-xs rounded-t-4xl rounded-br-4xl p-4 sm:p-6 w-full h-full overflow-hidden flex flex-col relative z-20'>
                       <div className='text-white w-42 mx-auto border-b border-white text-center mb-4 z-10 font-semibold tracking-wider text-sm uppercase'>
                         Explore AdVITya
                       </div>

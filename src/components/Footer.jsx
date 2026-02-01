@@ -77,8 +77,20 @@ function Footer() {
             <span className="text-[#6B5B7A] text-xs font-medium tracking-[0.2em] uppercase">
               Contact Us
             </span>
-            <div className="w-64 h-32 bg-[#1E1525] rounded-2xl">
-              {/* Contact form or map placeholder */}
+            <div className="flex flex-col gap-3 text-sm">
+              <div>
+                <div className="font-semibold text-[#CDB7D9]">Dr. Pushpdant Jain</div>
+                <div className="text-[#6B5B7A] text-xs">Convenor, AdVITya 2026</div>
+                <a href="mailto:advitya.convenor@vitbhopal.ac.in" className="text-[#6B5B7A] text-xs hover:text-[#CDB7D9] transition-colors">
+                  advitya.convenor@vitbhopal.ac.in
+                </a>
+              </div>
+              <div>
+                <div className="font-semibold text-[#CDB7D9]">SPOC</div>
+                <a href="mailto:events@vitbhopal.ac.in" className="text-[#6B5B7A] text-xs hover:text-[#CDB7D9] transition-colors">
+                  events@vitbhopal.ac.in
+                </a>
+              </div>
             </div>
           </div>
 
