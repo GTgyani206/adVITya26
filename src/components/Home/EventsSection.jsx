@@ -93,7 +93,7 @@ export default function EventsSection() {
             className="w-full relative bg-[#12001A] overflow-hidden flex flex-col lg:flex-row"
         >
             {/* Left section - Main content with pink/lavender background */}
-            <div className="flex-1 w-full relative bg-[#CDB7D9] rounded-b-4xl lg:rounded-b-none lg:rounded-r-4xl lg:min-h-screen">
+            <div className="flex-1 w-full relative bg-[#CDB7D9] rounded-b-4xl lg:rounded-b-none lg:rounded-r-[60px] lg:min-h-screen overflow-hidden border-r-[3px] border-[#12001A]">
                 <img src="/HomePage/EventsBGTop.svg" alt="BG" className='w-full h-full absolute top-0 object-cover' />
                 {/* Content */}
                 <div className="relative z-10 w-full h-full px-4 sm:px-8 md:px-12 py-10 md:py-16">
@@ -121,37 +121,30 @@ export default function EventsSection() {
             </div>
 
             {/* Right section - Dark vertical text with scroll animation - hidden on mobile */}
-            <div className="hidden lg:flex w-64 bg-[#12001A] relative items-center justify-center sticky top-0 h-screen">
+            <div className="hidden lg:flex w-64 bg-[#12001A] relative items-center justify-center sticky top-0 h-screen lg:rounded-l-[60px]">
                 <motion.div
                     className="flex items-center gap-4"
                     style={{ y: limitlessY }}
                 >
-                    {/* LIMITLESS vertical text */}
+                    {/* Feel the Enigma vertical text */}
                     <div
-                        className="text-[#c9b3dd] font-fugaz text-8xl font-bold tracking-wider"
+                        className="text-[#c9b3dd] font-fugaz text-7xl font-bold tracking-wider whitespace-nowrap"
                         style={{
-                            writingMode: 'vertical-rl',
-                            textOrientation: 'mixed',
-                            letterSpacing: '0.15em',
                             fontFamily: 'Arial, sans-serif',
                             fontWeight: '900',
-                            transform: 'rotate(180deg)'
+                            transform: 'rotate(-90deg)',
+                            transformOrigin: 'center center'
                         }}
                     >
-                        <span>///</span>
-                        LIMITLESS
-                        <span>///</span>
-                        LIMITLESS
-                        <span>///</span>
-                        LIMITLESS
+                        /// Feel the Enigma /// Feel the Enigma /// Feel the Enigma ///
                     </div>
                 </motion.div>
             </div>
 
-            {/* Mobile LIMITLESS text - horizontal at bottom */}
+            {/* Mobile Feel the Enigma text - horizontal at bottom */}
             <div className="lg:hidden w-full bg-[#12001A] py-8 overflow-hidden">
                 <div className="text-[#c9b3dd] font-fugaz text-4xl sm:text-5xl font-bold tracking-wider text-center whitespace-nowrap animate-pulse">
-                    /// LIMITLESS ///
+                    /// Feel the Enigma ///
                 </div>
             </div>
         </section>
