@@ -43,7 +43,7 @@ function Header() {
                 initial={{ y: -100 }}
                 animate={{ y: 0 }}
                 transition={{ duration: 0.5, ease: 'easeOut' }}
-                className={`fixed w-full z-50 transition-all duration-300 ${scrolled && !isOpen
+                className={`fixed w-full z-[100] transition-all duration-300 ${scrolled && !isOpen
                     ? 'border-white/20'
                     : 'bg-transparent'
                     }`}
@@ -101,7 +101,7 @@ function Header() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed inset-0 bg-[#12001A]/90 backdrop-blur-2xl z-40 flex overflow-hidden"
+                        className="fixed z-[90] inset-0 bg-[#12001A]/90 backdrop-blur-2xl flex overflow-hidden"
                     >
                         <motion.div
                             initial={{ opacity: 0 }}

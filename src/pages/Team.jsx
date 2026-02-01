@@ -43,7 +43,7 @@ function Team() {
   const chancellor = {
     name: 'Dr. G. Vishwanathan',
     role: 'Chancellor',
-    image: '/Chancellor.jpg',
+    image: 'Images/Chancellor.jpg',
   };
 
   const vps = [
@@ -123,7 +123,6 @@ function Team() {
 
   return (
     <div className="relative min-h-screen w-full bg-[#05010a] flex flex-col overflow-x-hidden">
-      <Header />
       <Background3D />
 
       <main className="flex-1 w-full pt-40 pb-20 px-4 md:px-8 relative z-10">
@@ -221,8 +220,6 @@ function Team() {
 
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
