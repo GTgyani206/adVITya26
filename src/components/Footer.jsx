@@ -34,11 +34,11 @@ function Footer() {
           </div>
 
           {/* Center Section - Sitemap */}
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col max-lg:text-left lg:text-center gap-6">
             <span className="text-[#6B5B7A] text-xs font-medium tracking-[0.2em] uppercase">
               Sitemap
             </span>
-            <nav className="flex flex-col items-center gap-3">
+            <nav className="flex flex-col gap-3">
               <Link
                 to="/"
                 className="text-[#6B5B7A] text-xl md:text-2xl font-bold tracking-wide hover:text-[#CDB7D9] transition-colors uppercase"

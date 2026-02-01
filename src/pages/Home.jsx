@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { User, Settings, ShoppingBag, LayoutGrid, MapPin, Bell, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import SmokeOverlay from '../components/SmokeOverlay';
-import RecordPlayer from '../components/RecordPlayer';
+import RecordPlayer from '../components/Home/RecordPlayer';
 import PaintReveal from '../components/PaintReveal';
 import { Link } from 'react-router-dom';
 import ExploreSection from '../components/Home/ExploreSection';
@@ -18,6 +16,7 @@ import EventsSection from '../components/Home/EventsSection';
 import { Activity } from 'lucide-react';
 import PreLoader from "../components/PreLoader";
 import { useUI } from '../contexts/UIContext';
+import MobileHeroSection from '../components/Home/MobileHeroSection';
 gsap.registerPlugin(ScrollTrigger);
 
 
@@ -89,6 +88,12 @@ const floatAnimation = {
 
 
 export default function Home() {
+  const videoSources = {
+    '2026': '/HomePage/Video.mp4',
+    '2025': '/HomePage/Video.mp4',
+    '2024': '/HomePage/Video.mp4'
+  };
+
   const { showHeader, hideHeader } = useUI();
 
   const [showPreLoader, setShowPreLoader] = useState(true);
@@ -302,10 +307,24 @@ export default function Home() {
 
   return (
     <>
-
       <PreLoader show={showPreLoader} />
       <div className="bg-[#12001A] w-screen relative">
-        <div ref={pinnedRef} className="fixed inset-0 w-screen min-h-screen lg:h-screen px-4 sm:px-6 overflow-hidden z-0">
+        {/* Mobile Hero Section */}
+        <div className="lg:hidden min-h-screen w-full relative overflow-hidden">
+          <MobileHeroSection
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            audioRef={audioRef}
+            mainContentRef={mainContentRef}
+            lyricsWrapperRef={lyricsWrapperRef}
+            lyricsContainerRef={lyricsContainerRef}
+            lyricsContentRef={lyricsContentRef}
+            linesRef={linesRef}
+          />
+        </div>
+
+        {/* Desktop Hero Section */}
+        <div ref={pinnedRef} className="hidden lg:block fixed inset-0 w-screen min-h-screen lg:h-screen px-4 sm:px-6 overflow-hidden z-0">
           {/* <SmokeOverlay variant="corners" /> */}
 
           <div ref={heroContentRef} className="w-full h-full">
@@ -338,11 +357,11 @@ export default function Home() {
               }}
             >
               <img src="/HomePage/TopBG.png" alt="" className='mx-auto absolute w-60 top-0 z-40 left-1/2 -translate-x-1/2' />
-              <Link to="/" className="mx-auto absolute top-4 z-50 left-1/2 -translate-x-1/2">
+              <Link to="/" className="mx-auto absolute top-6 z-50 left-1/2 -translate-x-1/2">
                 <img
                   src="Images/AdvityaLogo.png"
                   alt="VIT Bhopal"
-                  className={`w-auto transition-all duration-300 h-10 sm:h-12`}
+                  className={`w-auto transition-all duration-300 h-10 sm:h-9`}
                 />
               </Link>
               <motion.div
@@ -351,26 +370,6 @@ export default function Home() {
                 initial="hidden"
                 animate="visible"
               >
-                {/* <motion.div variants={itemVariants} className='w-32 h-full bg-black rounded-4xl flex flex-col items-center py-10 pt-30 z-20'>
-
-                            <div className="flex flex-col gap-6 items-center w-full">
-                                {[User, Settings, ShoppingBag, LayoutGrid, MapPin, Bell].map((Icon, index) => (
-                                    <motion.div
-                                        key={index}
-                                        variants={itemVariants}
-                                        className="p-3 rounded-full text-stone-400 hover:bg-white hover:text-black transition-all cursor-pointer"
-                                    >
-                                        <Icon size={20} />
-                                    </motion.div>
-                                ))}
-                            </div>
-                            <motion.div variants={itemVariants} className="mt-auto mb-4">
-                                <div className="p-3 rounded-full text-stone-400 hover:bg-white hover:text-black transition-all cursor-pointer">
-                                    <LogOut size={20} />
-                                </div>
-                            </motion.div>
-                        </motion.div> */}
-
                 <div className='relative bg-[#735483]/20 border-r-2 border-l-2 border-b-2  border-[#EFD2FF] rounded-4xl backdrop-blur-xl w-full h-full flex' onMouseMove={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const x = e.clientX - rect.left;
@@ -478,18 +477,32 @@ export default function Home() {
           </div>
         </div>
 
-        <div ref={wrapperRef} className="w-screen relative min-h-[300vh] pointer-events-none z-10" />
+        <div ref={wrapperRef} className="hidden lg:block w-screen relative min-h-[300vh] pointer-events-none z-10" />
 
         <div ref={titleRef} className="min-h-screen lg:h-screen bg-[#12001A] relative z-20 flex items-center overflow-hidden">
           <img src="/HomePage/TitleVector.png" alt="Title Vector" className="object-cover w-full h-full absolute top-0" />
           <div ref={scrollTextRef} className="flex gap-8 sm:gap-12 lg:gap-20 items-center whitespace-nowrap relative">
             <img src="/HomePage/TitleStar.svg" alt="Star" className='w-12 sm:w-16 lg:w-24 absolute -left-8 sm:-left-12 lg:-left-16 -top-10 sm:-top-14 lg:-top-18 hidden sm:block' />
             <img src="/HomePage/TitleStar2.svg" alt="Star" className='w-24 sm:w-40 lg:w-56 absolute left-1/2 -translate-x-1.2 top-20 sm:top-32 lg:top-40 hidden sm:block' />
-            <div className='text-[10vw] text-[#EFD2FF] font-fugaz font-bold leading-none'>
+            <div className='text-[25vw] sm:text-[10vw] text-[#EFD2FF] font-fugaz font-bold leading-none'>
               Central India's Largest Fest
             </div>
-            <div ref={videoWrapperRef} className='w-48 sm:w-64 lg:w-96 h-20 sm:h-28 lg:h-40 rounded-2xl lg:rounded-4xl transition-all duration-200 overflow-hidden shrink-0 relative z-10'>
-              <video src='/HomePage/Video.mp4' autoPlay muted loop playsInline className="w-full h-full object-cover" />
+            <div ref={videoWrapperRef} className='w-48 sm:w-64 lg:w-96 h-20 sm:h-28 lg:h-40 rounded-2xl lg:rounded-4xl overflow-hidden shrink-0 relative z-10 will-change-transform'>
+              <AnimatePresence mode="popLayout">
+                <motion.video
+                  key={selectedYear}
+                  src={videoSources[selectedYear]}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                />
+              </AnimatePresence>
             </div>
           </div>
           <motion.div

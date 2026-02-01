@@ -55,10 +55,21 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
         e.stopPropagation();
     };
 
-    const handleMouseMove = useCallback((e) => {
-        if (!isDragging || !audioRef?.current) return;
+    const handleTouchStart = (e) => {
+        if (!isPlaying || !audioRef?.current) return;
 
-        const currentMouseAngle = calculateAngle(e.clientX, e.clientY);
+        setIsDragging(true);
+        const touch = e.touches[0];
+        const startMouseAngle = calculateAngle(touch.clientX, touch.clientY);
+        dragOffset.current = armRotation - startMouseAngle;
+
+        e.stopPropagation();
+        // Prevent default to stop scrolling immediately on touch start
+        // e.preventDefault(); // React synthetic event, but touch-action: none on element helps more
+    };
+
+    const updateArmPosition = useCallback((clientX, clientY) => {
+        const currentMouseAngle = calculateAngle(clientX, clientY);
         let newRotation = currentMouseAngle + dragOffset.current;
 
         if (newRotation < 93) newRotation = 93;
@@ -70,8 +81,19 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
         if (audioRef.current.duration) {
             audioRef.current.currentTime = percentage * audioRef.current.duration;
         }
+    }, [audioRef]);
 
-    }, [isDragging, audioRef]);
+    const handleMouseMove = useCallback((e) => {
+        if (!isDragging || !audioRef?.current) return;
+        updateArmPosition(e.clientX, e.clientY);
+    }, [isDragging, audioRef, updateArmPosition]);
+
+    const handleTouchMove = useCallback((e) => {
+        if (!isDragging || !audioRef?.current) return;
+        if (e.cancelable) e.preventDefault(); // prevent scroll
+        const touch = e.touches[0];
+        updateArmPosition(touch.clientX, touch.clientY);
+    }, [isDragging, audioRef, updateArmPosition]);
 
     const handleMouseUp = useCallback(() => {
         setIsDragging(false);
@@ -81,16 +103,20 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
         if (isDragging) {
             window.addEventListener('mousemove', handleMouseMove);
             window.addEventListener('mouseup', handleMouseUp);
+            window.addEventListener('touchmove', handleTouchMove, { passive: false });
+            window.addEventListener('touchend', handleMouseUp);
         }
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('mouseup', handleMouseUp);
+            window.removeEventListener('touchmove', handleTouchMove);
+            window.removeEventListener('touchend', handleMouseUp);
         };
-    }, [isDragging, handleMouseMove, handleMouseUp]);
+    }, [isDragging, handleMouseMove, handleMouseUp, handleTouchMove]);
 
     return (
         <div
-            className="relative scale-[0.9] hover:scale-[0.92] transition-all duration-400 w-full h-full flex items-center justify-center cursor-pointer"
+            className="relative scale-[0.8] hover:scale-[0.92] transition-all duration-400 w-full h-full flex items-center justify-center cursor-pointer"
             onClick={onTogglePlay}
         >
             <div
@@ -135,9 +161,9 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
                         {/* Ticker Display */}
                         <div className="ticker" id="ticker">
                             <div className="ticker-content">
-                                <span>NOW PLAYING: TRACK 1</span>
-                                <span style={{ marginLeft: '20px' }}>NOW PLAYING: TRACK 1</span>
-                                <span style={{ marginLeft: '20px' }}>NOW PLAYING: TRACK 1</span>
+                                <span>NOW PLAYING: ADVITYA THEME SONG</span>
+                                <span style={{ marginLeft: '20px' }}>NOW PLAYING: ADVITYA THEME SONG</span>
+                                <span style={{ marginLeft: '20px' }}>NOW PLAYING: ADVITYA THEME SONG</span>
                             </div>
                         </div>
                         {/* Shimmer Effect */}
@@ -150,14 +176,14 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
             <img
                 src="/HomePage/Record3.png"
                 alt="Vinyl Record"
-                className="absolute"
+                className="absolute "
                 style={{
                     width: '316px',
                     height: '316px',
                     top: '34%',
                     left: '50%',
-                    transform: `translate(-50%, -50%) rotate(90deg)`,
-                    animation: isPlaying ? 'spin 2s linear infinite' : 'none',
+                    transform: `translate(-50%, -50%) rotate(0deg)`,
+                    animation: isPlaying ? 'discspin 2s linear infinite' : 'none',
                     zIndex: 1
                 }}
             />
@@ -165,6 +191,7 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
             {/* Tone Arm - larger and correctly positioned */}
             <svg
                 onMouseDown={handleMouseDown}
+                onTouchStart={handleTouchStart}
                 className={`absolute ${isDragging ? 'cursor-grabbing' : 'cursor-grab transition-transform duration-700 ease-linear'}`}
                 width="260"
                 height="280"
@@ -177,18 +204,19 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
                     transformOrigin: '85% 16%',
                     transform: `rotate(${armRotation}deg)`,
                     zIndex: 2,
+                    touchAction: 'none', // Critical: disables browser handling of gestures (pan/zoom) on this element
                     pointerEvents: isPlaying ? 'auto' : 'none' // Only interact when playing
                 }}
                 onClick={(e) => e.stopPropagation()}
             >
-                <g filter="url(#svg184878473_5813_filter0_i_585_2145)">
-                    <rect x="135.521" y="968.233" width="17.5677" height="76.8585" rx="2.19596" transform="rotate(-29 135.521 968.233)" fill="url(#svg184878473_5813_paint0_linear_585_2145)"></rect>
+                <g filter="url(#mobile_filter0)">
+                    <rect x="135.521" y="968.233" width="17.5677" height="76.8585" rx="2.19596" transform="rotate(-29 135.521 968.233)" fill="url(#mobile_paint0_linear)"></rect>
                 </g>
-                <g filter="url(#svg184878473_5813_filter1_dddiiiii_585_2145)">
-                    <path fillRule="evenodd" clipRule="evenodd" d="M608.264 97.6849C610.531 92.0005 607.714 85.5594 602 83.3661L546.754 62.1593C541.104 59.9903 534.764 62.8027 532.58 68.4472L257.278 779.864C248.719 801.983 233.227 820.735 213.122 833.316L28.4191 948.891C22.5927 952.537 20.5475 960.049 23.7215 966.145L46.7257 1010.33C50.2723 1017.14 58.87 1019.49 65.3861 1015.42L270.195 887.655C290.032 875.281 305.4 856.897 314.063 835.181L608.264 97.6849Z" fill="url(#svg184878473_5813_paint1_linear_585_2145)"></path>
+                <g filter="url(#mobile_filter1)">
+                    <path fillRule="evenodd" clipRule="evenodd" d="M608.264 97.6849C610.531 92.0005 607.714 85.5594 602 83.3661L546.754 62.1593C541.104 59.9903 534.764 62.8027 532.58 68.4472L257.278 779.864C248.719 801.983 233.227 820.735 213.122 833.316L28.4191 948.891C22.5927 952.537 20.5475 960.049 23.7215 966.145L46.7257 1010.33C50.2723 1017.14 58.87 1019.49 65.3861 1015.42L270.195 887.655C290.032 875.281 305.4 856.897 314.063 835.181L608.264 97.6849Z" fill="url(#mobile_paint1_linear)"></path>
                 </g>
                 <defs>
-                    <filter id="svg184878473_5813_filter0_i_585_2145" x="136.31" y="960.505" width="51.0488" height="74.1611" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <filter id="mobile_filter0" x="136.31" y="960.505" width="51.0488" height="74.1611" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
                         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
@@ -197,7 +225,7 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
                         <feColorMatrix type="matrix" values="0 0 0 0 0.981884 0 0 0 0 0.981884 0 0 0 0 0.981884 0 0 0 0.8 0"></feColorMatrix>
                         <feBlend mode="normal" in2="shape" result="effect1_innerShadow_585_2145"></feBlend>
                     </filter>
-                    <filter id="svg184878473_5813_filter1_dddiiiii_585_2145" x="-32.6681" y="10.9202" width="696.615" height="1065.79" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <filter id="mobile_filter1" x="-32.6681" y="10.9202" width="696.615" height="1065.79" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
                         <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
                         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
                         <feOffset dy="4.39192"></feOffset>
@@ -245,7 +273,7 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
                         <feColorMatrix type="matrix" values="0 0 0 0 0.737255 0 0 0 0 0.713726 0 0 0 0 0.678431 0 0 0 0.5 0"></feColorMatrix>
                         <feBlend mode="normal" in2="effect7_innerShadow_585_2145" result="effect8_innerShadow_585_2145"></feBlend>
                     </filter>
-                    <linearGradient id="svg184878473_5813_paint0_linear_585_2145" x1="135.521" y1="968.233" x2="135.521" y2="1045.09" gradientUnits="userSpaceOnUse">
+                    <linearGradient id="mobile_paint0_linear" x1="135.521" y1="968.233" x2="135.521" y2="1045.09" gradientUnits="userSpaceOnUse">
                         <stop stopColor="#464240"></stop>
                         <stop offset="0.088788" stopColor="#9B9997"></stop>
                         <stop offset="0.182644" stopColor="#433F3C"></stop>
@@ -253,19 +281,12 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
                         <stop offset="0.805873" stopColor="#5B5A55"></stop>
                         <stop offset="1" stopColor="#767772"></stop>
                     </linearGradient>
-                    <linearGradient id="svg184878473_5813_paint1_linear_585_2145" x1="553.542" y1="-173.47" x2="123.217" y2="-202.061" gradientUnits="userSpaceOnUse">
+                    <linearGradient id="mobile_paint1_linear" x1="553.542" y1="-173.47" x2="123.217" y2="-202.061" gradientUnits="userSpaceOnUse">
                         <stop stopColor="#FFFCFA"></stop>
                         <stop offset="1" stopColor="#EBEBEB"></stop>
                     </linearGradient>
                 </defs>
             </svg>
-
-            <style jsx>{`
-                @keyframes spin {
-                    from { transform: translate(-50%, -50%) rotate(90deg); }
-                    to { transform: translate(-50%, -50%) rotate(450deg); }
-                }
-            `}</style>
         </div>
     );
 };

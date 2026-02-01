@@ -34,7 +34,7 @@ const ParallaxBackground = () => {
     return (
         <Image
             ref={ref}
-            url="/Herosection_BG.svg"
+            url="Images/Herosection_BG.svg"
             scale={[viewport.width * 1.2, viewport.height * 1.2, 1]}
             transparent
             opacity={0.5}
