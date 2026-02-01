@@ -485,7 +485,7 @@ export default function Home() {
             <img src="/HomePage/TitleStar.svg" alt="Star" className='w-12 sm:w-16 lg:w-24 absolute -left-8 sm:-left-12 lg:-left-16 -top-10 sm:-top-14 lg:-top-18 hidden sm:block' />
             <img src="/HomePage/TitleStar2.svg" alt="Star" className='w-24 sm:w-40 lg:w-56 absolute left-1/2 -translate-x-1.2 top-20 sm:top-32 lg:top-40 hidden sm:block' />
             <div className='text-[25vw] sm:text-[10vw] text-[#EFD2FF] font-fugaz font-bold leading-none'>
-              Central India's Largest Fest
+              Central India's Flagship Fest
             </div>
             <div ref={videoWrapperRef} className='w-48 sm:w-64 lg:w-96 h-20 sm:h-28 lg:h-40 rounded-2xl lg:rounded-4xl overflow-hidden shrink-0 relative z-10 will-change-transform'>
               <AnimatePresence mode="popLayout">
