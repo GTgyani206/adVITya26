@@ -359,9 +359,9 @@ export default function Home() {
               <img src="/HomePage/TopBG.png" alt="" className='mx-auto absolute w-60 top-0 z-40 left-1/2 -translate-x-1/2' />
               <Link to="/" className="mx-auto absolute top-6 z-50 left-1/2 -translate-x-1/2">
                 <img
-                  src="Images/AdvityaLogo.png"
+                  src="Images/Logo_VITB.png"
                   alt="VIT Bhopal"
-                  className={`w-auto transition-all duration-300 h-10 sm:h-9`}
+                  className={`w-auto transition-all duration-300 h-10 sm:h-12`}
                 />
               </Link>
               <motion.div
