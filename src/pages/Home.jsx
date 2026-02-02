@@ -324,12 +324,12 @@ export default function Home() {
         </div>
 
         {/* Desktop Hero Section */}
-        <div ref={pinnedRef} className="hidden lg:block fixed inset-0 w-screen min-h-screen lg:h-screen px-4 sm:px-6 overflow-hidden z-0">
+        <div ref={pinnedRef} className="hidden lg:block fixed inset-0 w-screen h-screen overflow-hidden z-0">
           {/* <SmokeOverlay variant="corners" /> */}
 
-          <div ref={heroContentRef} className="w-full h-full">
+          <div ref={heroContentRef} className="w-full h-full p-4 xl:p-6">
             <motion.div
-              className='bg-[#12001A] flex flex-col lg:flex-row gap-5 py-5 px-4 sm:px-8 lg:px-20 w-full h-full rounded-4xl relative z-10'
+              className='bg-[#12001A] flex flex-col lg:flex-row gap-3 xl:gap-5 p-3 xl:p-5 w-full h-full rounded-4xl relative z-10'
               initial="hidden"
               animate={["visible", "float"]}
               variants={{
@@ -356,21 +356,21 @@ export default function Home() {
                 }
               }}
             >
-              <img src="/HomePage/TopBG.png" alt="" className='mx-auto absolute w-60 top-0 z-40 left-1/2 -translate-x-1/2' />
-              <Link to="/" className="mx-auto absolute top-6 z-50 left-1/2 -translate-x-1/2">
+              <img src="/HomePage/TopBG.png" alt="" className='mx-auto absolute w-48 xl:w-60 top-0 z-40 left-1/2 -translate-x-1/2' />
+              <Link to="/" className="mx-auto absolute top-4 xl:top-6 z-50 left-1/2 -translate-x-1/2">
                 <img
                   src="Images/Logo_VITB.png"
                   alt="VIT Bhopal"
-                  className={`w-auto transition-all duration-300 h-10 sm:h-12`}
+                  className={`w-auto transition-all duration-300 h-8 xl:h-10`}
                 />
               </Link>
               <motion.div
-                className="absolute inset-0 flex flex-col lg:flex-row gap-5 py-5 px-4 sm:px-6"
+                className="absolute inset-0 flex flex-col lg:flex-row gap-3 xl:gap-5 p-3 xl:p-5"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
               >
-                <div className='relative bg-[#735483]/20 border-r-2 border-l-2 border-b-2  border-[#EFD2FF] rounded-4xl backdrop-blur-xl w-full h-full flex' onMouseMove={(e) => {
+                <div className='relative bg-[#735483]/20 border-r-2 border-l-2 border-b-2  border-[#EFD2FF] rounded-4xl backdrop-blur-xl flex-1 h-full flex overflow-hidden' onMouseMove={(e) => {
                   const rect = e.currentTarget.getBoundingClientRect();
                   const x = e.clientX - rect.left;
                   const pct = (x / rect.width) * 100;
@@ -387,9 +387,9 @@ export default function Home() {
 
                   <img src="/HomePage/Background.png" alt="BG" className='w-full h-full absolute shadow-lg rounded-4xl opacity-30' />
 
-                  <div className='hidden lg:flex w-96 h-full z-10 flex-col'>
-                    <div className='w-content h-full max-h-[70%] flex py-6 px-4 flex-col relative'>
-                      <motion.div variants={itemVariants} className='flex gap-4 text-white font-medium'>
+                  <div className='hidden lg:flex w-72 xl:w-80 2xl:w-96 h-full z-10 flex-col'>
+                    <div className='w-content h-full max-h-[70%] flex py-4 xl:py-6 px-3 xl:px-4 flex-col relative'>
+                      <motion.div variants={itemVariants} className='flex gap-2 xl:gap-4 text-white font-medium text-sm xl:text-base'>
                         <NavButton to="/events">Events</NavButton>
                         <NavButton to="/sportfest">Sports</NavButton>
                         <NavButton to="/team">Team</NavButton>
@@ -410,7 +410,7 @@ export default function Home() {
                       <BookingCard variants={itemVariants} />
                     </div>
                   </div>
-                  <div className='w-full lg:flex-1 h-full z-10 px-4 sm:px-6 lg:px-10 pt-16 sm:pt-20 lg:pt-24 relative flex flex-col gap-4 overflow-hidden'>
+                  <div className='w-full lg:flex-1 h-full z-10 px-3 xl:px-6 pt-12 xl:pt-20 relative flex flex-col gap-3 xl:gap-4 overflow-hidden'>
                     <MusicTrigger isPlaying={isPlaying} onClick={() => setIsPlaying(!isPlaying)} />
                     <motion.div
                       initial={{ opacity: 0, x: 20, clipPath: 'inset(0 0 0 100%)' }}
@@ -425,7 +425,7 @@ export default function Home() {
                       Turn on music for the best experience
                     </motion.div>
                     <div ref={mainContentRef} className='flex flex-col text-white z-20 relative'>
-                      <motion.div variants={itemVariants} className='text-base sm:text-lg lg:text-xl relative top-0 font-bold uppercase tracking-wide flex flex-wrap gap-2 sm:gap-3'>
+                      <motion.div variants={itemVariants} className='text-sm xl:text-lg relative top-0 font-bold uppercase tracking-wide flex flex-wrap gap-2'>
                         <RevealText text="VIT Bhopal" />
                         <span className="text-[#EFD2FF]">
                           <RevealText text="Presents" delay={0.5} />
@@ -437,11 +437,11 @@ export default function Home() {
                         className="my-2 w-full transition-transform duration-500 ease-out"
                       />
 
-                      <motion.div variants={itemVariants} className='text-2xl font-bold text-right tracking-tight'>
+                      <motion.div variants={itemVariants} className='text-xl xl:text-2xl font-bold text-right tracking-tight'>
                         <RevealText text="Feel the Enigma" delay={0.5} />
                       </motion.div>
                     </div>
-                    <div ref={lyricsWrapperRef} className='bg-neutral-800/20 border-t border-x border-b border-r border-white/40 backdrop-blur-xs rounded-t-4xl rounded-br-4xl p-4 sm:p-6 w-full h-full overflow-hidden flex flex-col relative z-20'>
+                    <div ref={lyricsWrapperRef} className='bg-neutral-800/20 border-t border-x border-b border-r border-white/40 backdrop-blur-xs rounded-t-4xl rounded-br-4xl p-3 xl:p-6 w-full h-full overflow-hidden flex flex-col relative z-20'>
                       <div className='text-white w-42 mx-auto border-b border-white text-center mb-4 z-10 font-semibold tracking-wider text-sm uppercase'>
                         Explore AdVITya
                       </div>
@@ -455,7 +455,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                <div className='hidden lg:flex flex-col gap-6 h-full w-full max-w-58 z-20'>
+                <div className='hidden lg:flex flex-col gap-4 xl:gap-6 h-full w-full max-w-48 xl:max-w-56 z-20'>
                   <motion.div ref={heroVideoRef} variants={itemVariants} className='w-full h-full max-h-[40%] text-white'>
                     <div className='rounded-4xl bg-black w-full h-full overflow-hidden relative border border-white/10'>
                       <video

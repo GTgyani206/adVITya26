@@ -43,13 +43,13 @@ const HeaderSpacer = ({ onHeightChange }) => {
 const EventCard = ({ event, onClick }) => {
     return (
         <div className="bg-[#1A0B2]/60 backdrop-blur-sm rounded-[1.5vw] md:rounded-[1.5vw] sm:rounded-[12px] overflow-hidden border border-white/10 hover:border-purple-500/30 transition-all duration-300 cursor-pointer group">
-            {/* DESKTOP LAYOUT */}
+            {/* DESKTOP LAYOUT - Taller cards with 4:5 aspect ratio (1080x1350) */}
             <div className="hidden md:block">
-                <div className="relative h-[12vw] overflow-hidden">
+                <div className="relative w-full aspect-[4/5] overflow-hidden">
                     <img
                         src={event.poster}
                         alt={event.name}
-                        className="w-full h-full object-cover object-[50%_22%] group-hover:scale-[1.08] transition-transform duration-500"
+                        className="w-full h-full object-cover object-center group-hover:scale-[1.08] transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#1A0B2E] via-transparent to-transparent" />
                 </div>
@@ -72,13 +72,13 @@ const EventCard = ({ event, onClick }) => {
                 </div>
             </div>
 
-            {/* MOBILE LAYOUT - Proper card with image on top */}
+            {/* MOBILE LAYOUT - Taller card with 4:5 aspect ratio */}
             <div className="md:hidden flex flex-col">
-                <div className="relative h-[180px] overflow-hidden rounded-t-[12px]">
+                <div className="relative w-full aspect-[4/5] overflow-hidden rounded-t-[12px]">
                     <img
                         src={event.poster}
                         alt={event.name}
-                        className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-500"
+                        className="w-full h-full object-cover object-center group-hover:scale-[1.08] transition-transform duration-500"
                     />
                 </div>
 
@@ -107,9 +107,9 @@ const EventCard = ({ event, onClick }) => {
 /* ---------------------------- LOADING SKELETON ----------------------------- */
 const EventSkeleton = () => (
     <div className="bg-[#1A0B2E]/60 rounded-[1.5vw] md:rounded-[1.5vw] sm:rounded-[12px] overflow-hidden border border-white/10 animate-pulse">
-        {/* DESKTOP SKELETON */}
+        {/* DESKTOP SKELETON - 4:5 aspect ratio */}
         <div className="hidden md:block">
-            <div className="h-[12vw] bg-white/10" />
+            <div className="w-full aspect-[4/5] bg-white/10" />
             <div className="p-[1.2vw]">
                 <div className="h-[1.5vw] bg-white/10 rounded w-3/4 mb-[0.8vw]" />
                 <div className="h-[1vw] bg-white/10 rounded w-full mb-[0.5vw]" />
@@ -118,9 +118,9 @@ const EventSkeleton = () => (
             </div>
         </div>
 
-        {/* MOBILE SKELETON */}
+        {/* MOBILE SKELETON - 4:5 aspect ratio */}
         <div className="md:hidden flex flex-col">
-            <div className="h-[180px] bg-white/10 rounded-t-[12px]" />
+            <div className="w-full aspect-[4/5] bg-white/10 rounded-t-[12px]" />
             <div className="p-[16px] bg-[#1A0B2E]/60 rounded-b-[12px]">
                 <div className="h-[20px] bg-white/10 rounded w-3/4 mb-[8px]" />
                 <div className="h-[14px] bg-white/10 rounded w-full mb-[6px]" />
@@ -492,9 +492,9 @@ const EventsPage = () => {
                         </div>
                     </aside>
 
-                    {/* Right Content - Events Grid */}
+                    {/* Right Content - Events Grid - 3 columns */}
                     <div className="flex-1 p-[2vw]">
-                        <div className="grid grid-cols-2 gap-[2vw] w-full max-w-[80vw] ml-auto">
+                        <div className="grid grid-cols-3 gap-[1.5vw] w-full max-w-[80vw] ml-auto">
                             {loading
                                 ? Array.from({ length: 4 }).map((_, i) => <EventSkeleton key={i} />)
                                 : filteredEvents.length > 0
@@ -506,7 +506,7 @@ const EventsPage = () => {
                                         />
                                     ))
                                     : (
-                                        <div className="col-span-2 text-center py-[10vh]">
+                                        <div className="col-span-3 text-center py-[10vh]">
                                             <p className="text-gray-400 font-poppins text-[1.1vw]">No events match the selected filters.</p>
                                         </div>
                                     )}
