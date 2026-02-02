@@ -77,7 +77,7 @@ const MobileHeroSection = ({
                 {/* Navigation Buttons */}
                 <motion.div
                     variants={itemVariants}
-                    className="flex justify-center gap-2 shrink-0 px-2"
+                    className="flex justify-center gap-1.5 shrink-0"
                 >
                     <NavButton to="/events" className="text-xs px-3 py-1.5">Events</NavButton>
                     <NavButton to="/sportfest" className="text-xs px-3 py-1.5">Sports</NavButton>

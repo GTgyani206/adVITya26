@@ -51,7 +51,7 @@ function Header() {
                 <nav className="mx-auto">
                     <div className='w-full h-4 bg-[#CDB7D9]'></div>
                     <div className="flex justify-end items-center">
-                        <div className="flex items-center bg-[#CDB7D9] px-4 py-2 rounded-b-xl -top-1 gap-4 relative z-50">
+                        <div className="flex items-center bg-[#CDB7D9] px-2 sm:px-4 py-1.5 sm:py-2 rounded-b-xl -top-1 gap-2 sm:gap-4 relative z-50">
                             {!location.pathname.startsWith('/events') && (
                                 <div className='hidden sm:block bg-[#280338] px-4 py-2 rounded-xl'>
                                     <Link
@@ -66,26 +66,26 @@ function Header() {
                             {/* Close/Hamburger Button */}
                             <motion.button
                                 onClick={() => setIsOpen(!isOpen)}
-                                className="relative z-50 p-2 group h-10 w-10 flex flex-col items-center justify-center"
+                                className="relative z-50 p-1.5 sm:p-2 group h-8 w-8 sm:h-10 sm:w-10 flex flex-col items-center justify-center"
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                             >
                                 <div
-                                    className={`absolute h-[3px] rounded-full transition-all duration-300 transform bg-[#470067] ${isOpen
-                                        ? 'w-6 sm:w-8 rotate-45'
-                                        : 'w-6 sm:w-8 -translate-y-2 '
+                                    className={`absolute h-[2.5px] sm:h-[3px] rounded-full transition-all duration-300 transform bg-[#470067] ${isOpen
+                                        ? 'w-5 sm:w-6 md:w-8 rotate-45'
+                                        : 'w-5 sm:w-6 md:w-8 -translate-y-1.5 sm:-translate-y-2'
                                         }`}
                                 />
                                 <div
-                                    className={`absolute h-[3px] rounded-full transition-all duration-300 transform bg-[#470067] ${isOpen
+                                    className={`absolute h-[2.5px] sm:h-[3px] rounded-full transition-all duration-300 transform bg-[#470067] ${isOpen
                                         ? 'opacity-0'
-                                        : 'w-6 sm:w-8'
+                                        : 'w-5 sm:w-6 md:w-8'
                                         }`}
                                 />
                                 <div
-                                    className={`absolute h-[3px] rounded-full transition-all duration-300 transform bg-[#470067] ${isOpen
-                                        ? 'w-6 sm:w-8 -rotate-45'
-                                        : 'w-4 translate-y-2 translate-x-1 sm:translate-x-2 group-hover:w-8 group-hover:translate-x-0'
+                                    className={`absolute h-[2.5px] sm:h-[3px] rounded-full transition-all duration-300 transform bg-[#470067] ${isOpen
+                                        ? 'w-5 sm:w-6 md:w-8 -rotate-45'
+                                        : 'w-3.5 sm:w-4 translate-y-1.5 sm:translate-y-2 translate-x-0.5 sm:translate-x-1 md:translate-x-2 group-hover:w-8 group-hover:translate-x-0'
                                         }`}
                                 />
                             </motion.button>
