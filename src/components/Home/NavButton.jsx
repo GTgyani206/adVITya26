@@ -17,7 +17,7 @@ export default function NavButton({ children, to }) {
         </>
     );
 
-    const className = "relative block px-6 py-1.5 text-sm rounded-full overflow-hidden border border-[#EFD2FF]/30 text-white cursor-pointer group whitespace-nowrap";
+    const className = "relative block px-3 sm:px-6 py-1.5 text-xs sm:text-sm rounded-full overflow-hidden border border-[#EFD2FF]/30 text-white cursor-pointer group whitespace-nowrap";
 
     if (to) {
         return (

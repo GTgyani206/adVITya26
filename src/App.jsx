@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -17,6 +18,11 @@ function AppContent() {
   const location = useLocation();
   const { headerVisible } = useUI();
   const isHomePage = location.pathname === '/';
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   // Show header: on homepage only when headerVisible is true, on other pages always show
   const shouldShowHeader = isHomePage ? headerVisible : true;

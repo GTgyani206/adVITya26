@@ -26,7 +26,7 @@ export default function BookingCard({ variants }) {
                         className="w-full bg-white rounded-full h-10 relative overflow-hidden group cursor-pointer"
                         whileHover="hover"
                         initial="initial"
-                        onClick={() => navigate('/events')}
+                        onClick={() => window.open('https://vtop.vitbhopal.ac.in/vtop/login', '_blank')}
                     >
                         <motion.div
                             className="absolute inset-0 bg-[#12001A]"
@@ -55,7 +55,7 @@ export default function BookingCard({ variants }) {
                 </div>
 
                 <button
-                    onClick={() => navigate('/events')}
+                    onClick={() => window.open('https://vtop.vitbhopal.ac.in/vtop/login', '_blank')}
                     className="w-full bg-[#EFD2FF] hover:bg-white text-[#12001A] rounded-xl h-9 font-bold uppercase tracking-wider text-[10px] flex items-center justify-between px-4 transition-all duration-300"
                 >
                     <span>Book Now</span>

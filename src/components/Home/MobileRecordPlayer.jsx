@@ -129,7 +129,7 @@ const RecordPlayer = ({ isPlaying, audioRef, isHovered, onTogglePlay }) => {
             />
 
             <div className="record-player origin-center" style={{
-                transform: `rotate(90deg) scale(0.75)`,
+                transform: `rotate(0deg) scale(0.75)`,
                 position: 'relative',
                 transition: 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
             }}>

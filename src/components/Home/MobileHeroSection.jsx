@@ -45,9 +45,9 @@ const MobileHeroSection = ({
             {/* Logo */}
             <Link to="/" className="absolute top-6 z-50 left-1/2 -translate-x-1/2">
                 <img
-                    src="Images/AdvityaLogo.png"
+                    src="Images/VITB_Logo.png"
                     alt="VIT Bhopal"
-                    className="w-auto h-10"
+                    className="w-auto h-12 mix-blend-screen"
                 />
             </Link>
 
@@ -81,7 +81,8 @@ const MobileHeroSection = ({
                 >
                     <NavButton to="/events" className="text-xs px-3 py-1.5">Events</NavButton>
                     <NavButton to="/sportfest" className="text-xs px-3 py-1.5">Sports</NavButton>
-                    <NavButton to="/sponsor" className="text-xs px-3 py-1.5">Sponsor</NavButton>
+                    <NavButton to="/team" className="text-xs px-3 py-1.5">Team</NavButton>
+                    <NavButton to="/sponsor" className="text-xs px-2.5 py-1.5">Sponsor</NavButton>
                 </motion.div>
                 <img
                     src="/HomePage/Background.png"
