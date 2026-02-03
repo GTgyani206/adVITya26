@@ -744,7 +744,7 @@ export default function AdminDashboard() {
           </div>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-10 scrollbar-thin scrollbar-thumb-[#CDB7D9]/10">
+        <main className={`flex-1 overflow-y-auto p-10 ${showAddEvent ? 'no-scrollbar' : 'scrollbar-thin scrollbar-thumb-[#CDB7D9]/10'}`}>
           <AnimatePresence mode="wait">
 
             {activeTab === 'overview' && (

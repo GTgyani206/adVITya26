@@ -744,7 +744,7 @@ export default function CoordinatorDashboard({ clubName }) {
           </div>
         )}
 
-        <main className="flex-1 overflow-y-auto p-10 scrollbar-thin scrollbar-thumb-[#CDB7D9]/10">
+        <main className={`flex-1 overflow-y-auto p-10 ${showAddEvent || showSuggestEdit ? 'no-scrollbar' : 'scrollbar-thin scrollbar-thumb-[#CDB7D9]/10'}`}>
           <AnimatePresence mode="wait">
 
             {activeTab === 'events' && (
