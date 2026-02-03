@@ -132,23 +132,23 @@ export default function EventsSection() {
 
             <div className="relative flex min-h-screen">
                 {/* LEFT CONTENT */}
-                <div className="flex-1 px-6 sm:px-12 py-20">
+                <div className="flex-1 px-6 sm:px-12 py-10 md:py-20">
                     {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="mb-20"
+                        className="mb-10 md:mb-20"
                     >
-                        <h2 className="text-5xl font-medium text-[#1a0a2e]">
+                        <h2 className="text-3xl md:text-5xl font-medium text-[#1a0a2e] text-center md:text-left">
                             Our Events ✨
                         </h2>
                     </motion.div>
 
                     {/* CENTERED CARDS */}
-                    <div className="flex justify-center">
-                        <div className="flex gap-24">
+                    <div className="flex justify-center w-full">
+                        <div className="flex flex-col md:flex-row gap-10 md:gap-12 lg:gap-24 items-center">
                             {daysData.map((dayData, index) => (
                                 <PerformerCard
                                     key={index}
